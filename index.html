@@ -74,7 +74,6 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .header .brand { color: var(--bg); }
-.header .brand img { filter: invert(1); }
 .header .nav a { color: var(--bg); }
 .header .nav a:hover { background: var(--bg); color: var(--ink); }
 
@@ -195,7 +194,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .hero-dark .hero-mark {
-  filter: invert(1);
+  /* SVG is already white-on-transparent, no filter needed */
 }
 
 .hero-dark .lede {
@@ -792,7 +791,7 @@ img { max-width: 100%; height: auto; display: block; }
   <!-- HERO -->
   <section class="hero hero-dark">
     <div class="hero-inner">
-    <img class="hero-mark" src="logo.jpg" alt="">
+    <img class="hero-mark" src="column-white.svg" alt="">
     <h1>Understand the legal layer of emerging tech.</h1>
     <p class="lede">Stay at the cutting edge of the legal profession and emerging tech. One email each week with five bullets. That's it.</p>
 
@@ -900,7 +899,7 @@ img { max-width: 100%; height: auto; display: block; }
 <footer class="footer">
   <div class="footer-inner">
     <a href="#top" class="brand">
-      <img src="logo.jpg" alt="">
+      <img src="column-black.svg" alt="">
       <span>Law of Code</span>
     </a>
     <div class="footer-links">
