@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Law of Code — The legal layer of emerging tech</title>
-<meta name="description" content="The world's shortest legal newsletter. Written weekly by Jacob Robinson.">
+<meta name="description" content="The world's shortest legal newsletter about the legal layer of emerging tech. Hosted by Jacob Robinson.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script defer data-domain="lawofcode.fm" src="https://plausible.io/js/script.js"></script>
 <style>
 :root {
   --bg: #ffffff;
@@ -660,15 +661,15 @@ img { max-width: 100%; height: auto; display: block; }
     <p class="section-sub">Deep-dive explainers and interviews with the people shaping the legal and regulatory landscape of emerging technology. One lawyer told me a firm could charge $60,000 for one of the podcast episodes if it were a legal memo. Another sent it to every employee at their startup.</p>
 
     <div class="listen-grid">
-      <a href="#" aria-label="Listen on Apple Podcasts">
+      <a href="https://podcasts.apple.com/ca/podcast/law-of-code/id1578287932" target="_blank" rel="noopener" aria-label="Listen on Apple Podcasts">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 8c-1.1 0-2 .9-2 2v3.5a2 2 0 1 0 4 0V16c0-1.1-.9-2-2-2z"/></svg>
         Apple Podcasts
       </a>
-      <a href="#" aria-label="Listen on Spotify">
+      <a href="https://open.spotify.com/show/4RSekM9c79F86cI2weUq66" target="_blank" rel="noopener" aria-label="Listen on Spotify">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.43a.62.62 0 0 1-.86.21c-2.36-1.44-5.33-1.77-8.83-.97a.625.625 0 1 1-.28-1.22c3.83-.87 7.12-.5 9.77 1.12.3.18.39.57.2.86zm1.22-2.71a.78.78 0 0 1-1.08.26c-2.7-1.66-6.82-2.14-10.02-1.17a.78.78 0 1 1-.45-1.49c3.65-1.11 8.19-.57 11.29 1.32.36.22.48.7.26 1.08zm.11-2.83c-3.24-1.92-8.59-2.1-11.69-1.16a.94.94 0 1 1-.54-1.79c3.55-1.08 9.45-.87 13.18 1.34.45.27.6.85.34 1.3-.27.45-.85.6-1.29.31z"/></svg>
         Spotify
       </a>
-      <a href="#" aria-label="Watch on YouTube">
+      <a href="https://www.youtube.com/@lawofcodeFM" target="_blank" rel="noopener" aria-label="Watch on YouTube">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.51 2.51 0 0 0-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.51 2.51 0 0 0 2.42 7.19 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.51 2.51 0 0 0 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
         YouTube
       </a>
@@ -679,35 +680,8 @@ img { max-width: 100%; height: auto; display: block; }
       <a href="#">All episodes →</a>
     </div>
 
-    <ul class="episode-list">
-      <li>
-        <a href="#" class="episode">
-          <span class="episode-num">№ 200</span>
-          <span class="episode-title">AI &amp; Legal Privilege: Can Your Chatbot Keep a Secret?</span>
-          <span class="episode-meta">Apr 2026</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="episode">
-          <span class="episode-num">№ 199</span>
-          <span class="episode-title">Freezing Stablecoins: The New Choke Point of Crypto Enforcement</span>
-          <span class="episode-meta">Apr 2026</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="episode">
-          <span class="episode-num">№ 198</span>
-          <span class="episode-title">Market Structure After the GENIUS Act</span>
-          <span class="episode-meta">Mar 2026</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="episode">
-          <span class="episode-num">№ 197</span>
-          <span class="episode-title">The Tokenized Treasury Boom and the Securities Question</span>
-          <span class="episode-meta">Mar 2026</span>
-        </a>
-      </li>
+    <ul class="episode-list" id="episode-list">
+      <li style="padding:20px 0;color:var(--muted);font-size:14px;">Loading episodes…</li>
     </ul>
   </section>
 
@@ -802,12 +776,91 @@ img { max-width: 100%; height: auto; display: block; }
 </footer>
 
 <script>
-function handleSignup(e, form) {
+// ----- Newsletter signup -----
+async function handleSignup(e, form) {
   e.preventDefault();
-  // Beehiiv integration goes here. Placeholder behavior:
-  form.classList.add('is-success');
+  const input = form.querySelector('input[type="email"]');
+  const button = form.querySelector('button');
+  const email = input.value.trim();
+
+  if (!email) return false;
+
+  button.disabled = true;
+  const originalText = button.textContent;
+  button.textContent = 'Subscribing…';
+
+  try {
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+
+    if (res.ok) {
+      form.classList.add('is-success');
+    } else {
+      const data = await res.json().catch(() => ({}));
+      button.textContent = data.error || 'Try again';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 2500);
+    }
+  } catch (err) {
+    button.textContent = 'Network error';
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+    }, 2500);
+  }
+
   return false;
 }
+
+// ----- Episode list (auto-pulled from RSS) -----
+async function loadEpisodes() {
+  const list = document.getElementById('episode-list');
+  if (!list) return;
+
+  try {
+    const res = await fetch('/api/episodes');
+    if (!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+    const eps = data.episodes || [];
+
+    if (eps.length === 0) {
+      list.innerHTML = '<li style="padding:20px 0;color:var(--muted);font-size:14px;">Episodes coming soon.</li>';
+      return;
+    }
+
+    list.innerHTML = eps.map(ep => {
+      const num = ep.episode ? `№ ${escapeHTML(ep.episode)}` : '';
+      const title = escapeHTML(ep.title);
+      const date = escapeHTML(ep.pubDate);
+      const link = escapeHTML(ep.link || '#');
+      return `
+        <li>
+          <a href="${link}" target="_blank" rel="noopener" class="episode">
+            <span class="episode-num">${num}</span>
+            <span class="episode-title">${title}</span>
+            <span class="episode-meta">${date}</span>
+          </a>
+        </li>
+      `;
+    }).join('');
+  } catch (err) {
+    // Silently leave list empty / fallback to whatever was there
+    console.error('Episode load failed:', err);
+  }
+}
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+document.addEventListener('DOMContentLoaded', loadEpisodes);
 </script>
 
 </body>
