@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law of Code — The legal layer of emerging tech</title>
+<meta name="description" content="The world's shortest legal newsletter about the legal layer of emerging tech. Hosted by Jacob Robinson.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --ink: #0a0a0a;
+  --ink-soft: #2a2a2a;
+  --muted: #6b6b6b;
+  --line: #e5e5e5;
+  --hover-bg: #0a0a0a;
+  --hover-ink: #ffffff;
+  --serif: 'Fraunces', 'Times New Roman', serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --max-w: 1200px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- HEADER ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.header .brand { color: var(--bg); }
+.header .brand img { filter: invert(1); }
+.header .nav a { color: var(--bg); }
+.header .nav a:hover { background: var(--bg); color: var(--ink); }
+
+.header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.brand img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nav a {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.nav a:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+@media (max-width: 640px) {
+  .header-inner { padding: 12px 16px; }
+  .brand span { display: none; }
+  .nav a { padding: 6px 8px; font-size: 12px; letter-spacing: 0.06em; }
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 72px 20px 48px;
+  text-align: center;
+}
+
+.hero-mark {
+  width: 120px;
+  height: auto;
+  margin: 0 auto 32px;
+  opacity: 0.95;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 8vw, 88px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 144;
+  margin-bottom: 24px;
+  max-width: 14ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero .lede {
+  font-family: var(--sans);
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 0 auto 40px;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 48px 20px 32px; }
+  .hero-mark { width: 88px; margin-bottom: 24px; }
+}
+
+/* Dark hero variant */
+.hero.hero-dark {
+  background: var(--ink);
+  color: var(--bg);
+  max-width: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.hero-dark .hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.hero-dark .hero-mark {
+  filter: invert(1);
+}
+
+.hero-dark .lede {
+  color: rgba(255,255,255,0.72);
+}
+
+.hero-dark .signup input[type="email"] {
+  background: transparent;
+  border-color: rgba(255,255,255,0.4);
+  color: var(--bg);
+}
+
+.hero-dark .signup input[type="email"]::placeholder { color: rgba(255,255,255,0.5); }
+.hero-dark .signup input[type="email"]:focus { background: rgba(255,255,255,0.05); border-color: var(--bg); }
+
+.hero-dark .signup button {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--bg);
+}
+
+.hero-dark .signup button:hover {
+  background: transparent;
+  color: var(--bg);
+}
+
+.hero-dark .signup .pitch { color: rgba(255,255,255,0.55); }
+.hero-dark .signup .success { color: rgba(255,255,255,0.72); }
+
+/* ---------- NEWSLETTER FORM (HERO) ---------- */
+.signup {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signup-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.signup input[type="email"] {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid var(--ink);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  border-radius: 0;
+  outline: none;
+  transition: background 160ms ease;
+}
+
+.signup input[type="email"]::placeholder {
+  color: var(--muted);
+}
+
+.signup input[type="email"]:focus {
+  background: #fafafa;
+}
+
+.signup button {
+  padding: 14px 22px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+  white-space: nowrap;
+}
+
+.signup button:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.signup .pitch {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .signup-row { flex-direction: column; }
+  .signup button { width: 100%; }
+}
+
+/* ---------- SECTION ---------- */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 80px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.section-label {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 144;
+  margin-bottom: 8px;
+}
+
+.section-title em {
+  font-style: italic;
+}
+
+.section-sub {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 60ch;
+}
+
+@media (max-width: 640px) {
+  .section { padding: 56px 20px; }
+}
+
+/* ---------- LISTEN ---------- */
+.listen-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.listen-grid a {
+  border: 1px solid var(--ink);
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 160ms ease, color 160ms ease;
+  min-height: 120px;
+}
+
+.listen-grid a:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.listen-grid svg {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 480px) {
+  .listen-grid { grid-template-columns: 1fr; }
+}
+
+/* Episodes */
+.episodes-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.episodes-header h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.episodes-header a {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.episodes-header a:hover { color: var(--ink); border-color: var(--ink); }
+
+.episode-list { list-style: none; }
+
+.episode {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  transition: padding-left 200ms ease;
+}
+
+.episode:hover { padding-left: 8px; }
+
+.episode-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+
+.episode-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(18px, 2.4vw, 22px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.episode-meta {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .episode { grid-template-columns: 48px 1fr; gap: 12px; }
+  .episode-meta { grid-column: 2; margin-top: 4px; }
+}
+
+/* ---------- READ ---------- */
+.read-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.read-card {
+  border-top: 1px solid var(--ink);
+  padding-top: 20px;
+  display: block;
+  transition: opacity 200ms ease;
+}
+
+.read-card:hover { opacity: 0.6; }
+
+.read-card .kicker {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.read-card h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(20px, 2.6vw, 26px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+.read-card p {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .read-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ---------- NEWSLETTER (full section) ---------- */
+.newsletter-section {
+  padding: 96px 20px;
+  margin: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.newsletter-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-section h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 144;
+  margin-bottom: 20px;
+}
+
+.newsletter-section p {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--muted);
+  margin-bottom: 36px;
+  max-width: 48ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 640px) {
+  .newsletter-section { padding: 64px 20px; }
+}
+
+/* ---------- ABOUT ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-aside h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+.about-aside p {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.about-body {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(17px, 1.8vw, 19px);
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  font-variation-settings: 'opsz' 14;
+}
+
+.about-body p { margin-bottom: 1.1em; }
+
+.about-body p:first-child::first-letter {
+  font-family: var(--serif);
+  font-weight: 500;
+  float: left;
+  font-size: 4.2em;
+  line-height: 0.86;
+  padding-right: 10px;
+  padding-top: 6px;
+}
+
+@media (max-width: 800px) {
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 48px 20px 64px;
+  margin-top: 0;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer .brand img { width: 24px; height: 24px; }
+
+.footer-meta {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-links a { color: var(--muted); transition: color 160ms ease; }
+.footer-links a:hover { color: var(--ink); }
+
+/* ---------- SUCCESS STATE ---------- */
+.signup .success {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+  padding: 14px 0;
+  display: none;
+}
+
+.signup.is-success .signup-row { display: none; }
+.signup.is-success .pitch { display: none; }
+.signup.is-success .success { display: block; }
+
+.newsletter-section .signup .success { color: rgba(255,255,255,0.7); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#top" class="brand" aria-label="Law of Code home">
+      <img src="logo.jpg" alt="Law of Code">
+      <span>Law of Code</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#listen">Listen</a>
+      <a href="#read">Read</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero hero-dark">
+    <div class="hero-inner">
+    <img class="hero-mark" src="logo.jpg" alt="">
+    <h1>Understand the legal layer of emerging tech.</h1>
+    <p class="lede">Stay at the cutting edge of the legal profession and emerging tech. One email each week with five bullets. That's it.</p>
+
+    <form class="signup" id="hero-signup" onsubmit="return handleSignup(event, this)">
+      <div class="signup-row">
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </div>
+      <p class="pitch">The world's shortest legal newsletter.</p>
+      <p class="success">Thanks. Check your inbox to confirm.</p>
+    </form>
+    </div>
+  </section>
+
+  <!-- LISTEN -->
+  <section class="section" id="listen">
+    <span class="section-label">— Listen</span>
+    <h2 class="section-title">The podcast.</h2>
+    <p class="section-sub">Deep-dive explainers and interviews with the people shaping the legal and regulatory landscape of emerging technology. One lawyer told me a firm could charge $60,000 for one of the podcast episodes if it were a legal memo. Another sent it to every employee at their startup.</p>
+
+    <div class="listen-grid">
+      <a href="#" aria-label="Listen on Apple Podcasts">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 8c-1.1 0-2 .9-2 2v3.5a2 2 0 1 0 4 0V16c0-1.1-.9-2-2-2z"/></svg>
+        Apple Podcasts
+      </a>
+      <a href="#" aria-label="Listen on Spotify">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.43a.62.62 0 0 1-.86.21c-2.36-1.44-5.33-1.77-8.83-.97a.625.625 0 1 1-.28-1.22c3.83-.87 7.12-.5 9.77 1.12.3.18.39.57.2.86zm1.22-2.71a.78.78 0 0 1-1.08.26c-2.7-1.66-6.82-2.14-10.02-1.17a.78.78 0 1 1-.45-1.49c3.65-1.11 8.19-.57 11.29 1.32.36.22.48.7.26 1.08zm.11-2.83c-3.24-1.92-8.59-2.1-11.69-1.16a.94.94 0 1 1-.54-1.79c3.55-1.08 9.45-.87 13.18 1.34.45.27.6.85.34 1.3-.27.45-.85.6-1.29.31z"/></svg>
+        Spotify
+      </a>
+      <a href="#" aria-label="Watch on YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.51 2.51 0 0 0-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.51 2.51 0 0 0 2.42 7.19 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.51 2.51 0 0 0 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+        YouTube
+      </a>
+    </div>
+
+    <div class="episodes-header">
+      <h3>Recent Episodes</h3>
+      <a href="#">All episodes →</a>
+    </div>
+
+    <ul class="episode-list">
+      <li>
+        <a href="#" class="episode">
+          <span class="episode-num">№ 200</span>
+          <span class="episode-title">AI &amp; Legal Privilege: Can Your Chatbot Keep a Secret?</span>
+          <span class="episode-meta">Apr 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="episode">
+          <span class="episode-num">№ 199</span>
+          <span class="episode-title">Freezing Stablecoins: The New Choke Point of Crypto Enforcement</span>
+          <span class="episode-meta">Apr 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="episode">
+          <span class="episode-num">№ 198</span>
+          <span class="episode-title">Market Structure After the GENIUS Act</span>
+          <span class="episode-meta">Mar 2026</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="episode">
+          <span class="episode-num">№ 197</span>
+          <span class="episode-title">The Tokenized Treasury Boom and the Securities Question</span>
+          <span class="episode-meta">Mar 2026</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- READ -->
+  <section class="section" id="read">
+    <span class="section-label">— Read</span>
+    <h2 class="section-title">Long-form explainers.</h2>
+    <p class="section-sub">Plain-English breakdowns of the legal questions emerging tech keeps creating. Written for lawyers, founders and serious generalists.</p>
+
+    <div class="read-grid">
+      <a class="read-card" href="#">
+        <div class="kicker">Stablecoins · Apr 2026</div>
+        <h4>How freezing a stablecoin actually works — and why issuers should care.</h4>
+        <p>The mechanics of OFAC compliance at the smart-contract level, and what enforcement actions in 2025-26 tell us about the standard of care.</p>
+      </a>
+      <a class="read-card" href="#">
+        <div class="kicker">AI · Mar 2026</div>
+        <h4>Privilege, prompts and the discoverability of LLM logs.</h4>
+        <p>Where the work-product doctrine breaks down when associates run drafts through a model, and how firms are rewriting their retention policies.</p>
+      </a>
+      <a class="read-card" href="#">
+        <div class="kicker">Market structure · Feb 2026</div>
+        <h4>What the GENIUS Act does — and what it leaves untouched.</h4>
+        <p>A section-by-section read of the new federal stablecoin framework, and the open questions Treasury still has to answer through rulemaking.</p>
+      </a>
+      <a class="read-card" href="#">
+        <div class="kicker">Tokenization · Jan 2026</div>
+        <h4>Tokenized treasuries and the Howey trap.</h4>
+        <p>Why on-chain T-bill products keep getting treated as securities, and the structural design choices that change the analysis.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER (full dark section) -->
+  <section class="newsletter-section" id="newsletter">
+    <div class="newsletter-inner">
+      <span class="section-label">— Newsletter</span>
+      <h2>The world's shortest legal newsletter.</h2>
+      <p>A short read in your inbox. No filler. No hot takes. The legal developments worth knowing, explained in plain English.</p>
+
+      <form class="signup" id="footer-signup" onsubmit="return handleSignup(event, this)">
+        <div class="signup-row">
+          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+          <button type="submit">Subscribe</button>
+        </div>
+        <p class="success">Thanks. Check your inbox to confirm.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <span class="section-label">— About</span>
+    <h2 class="section-title">Five years. 200 episodes. One throughline.</h2>
+
+    <div class="about-grid">
+      <aside class="about-aside">
+        <h3>Jacob Robinson</h3>
+        <p>Host, Law of Code. Trained as a lawyer in Canada, now full-time on the show. Five years and 200 episodes deep on the legal layer of emerging tech.</p>
+      </aside>
+
+      <div class="about-body">
+        <p>I started the Law of Code podcast in law school because I needed an excuse to talk to lawyers about an emerging technology I was obsessed with: Bitcoin. Since then I've spoken with hundreds of lawyers regulators and entrepreneurs about emerging technology and the law.</p>
+
+        <p>After graduating I began articling at a major Canadian firm where I worked on what was at the time the largest crypto M&amp;A transaction in Canadian history. While articling I was poached — which doesn't usually happen to someone with technically zero years of practice — to join one of Canada's top firms. In my first months as a first-year associate I helped land a client with a market cap of over a billion dollars and assisted major crypto exchanges in navigating the Canadian legal landscape. I kept the podcast going the whole time.</p>
+
+        <p>Six months into my legal career a tumor started growing. I didn't know it. I kept getting sicker for nearly two years before anyone found it. Then came chemo and radiation. I was 29.</p>
+
+        <p>That stretch gave me a new perspective on what I wanted to spend my time on. Not long after I finished radiation I realized the Law of Code podcast was what I truly loved doing — and that I wanted to build it into a career helping lawyers and operators understand the legal layer of emerging tech. I have been tumor free since the fall of 2025.</p>
+
+        <p>In April 2026 I decided to make Law of Code the best legal podcast in the world. Today it is the world's No. 1 legal tech podcast, with thousands of lawyers regulators and builders listening to deep dives on AI blockchain and crypto the open internet and the legal questions emerging tech keeps creating. The plan from here is to keep going wider — into every major legal vertical — without ever giving up the depth.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="#top" class="brand">
+      <img src="logo.jpg" alt="">
+      <span>Law of Code</span>
+    </a>
+    <div class="footer-links">
+      <a href="#listen">Listen</a>
+      <a href="#read">Read</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="footer-meta">© 2026 Law of Code · lawofcode.fm</div>
+  </div>
+</footer>
+
+<script>
+function handleSignup(e, form) {
+  e.preventDefault();
+  // Beehiiv integration goes here. Placeholder behavior:
+  form.classList.add('is-success');
+  return false;
+}
+</script>
+
+</body>
+</html>
