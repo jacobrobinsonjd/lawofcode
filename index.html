@@ -614,6 +614,119 @@ img { max-width: 100%; height: auto; display: block; }
 .signup.is-success .success { display: block; }
 
 .newsletter-section .signup .success { color: rgba(255,255,255,0.7); }
+
+/* ---------- CORNER NUDGE ---------- */
+.nudge {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.nudge.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nudge-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.nudge-close:hover {
+  color: var(--ink);
+  background: var(--line);
+}
+
+.nudge-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  padding-right: 24px;
+}
+
+.nudge-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+
+.nudge .signup-row {
+  gap: 6px;
+}
+
+.nudge input[type="email"] {
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.nudge button {
+  padding: 10px 16px;
+  font-size: 12px;
+}
+
+.nudge .success {
+  font-size: 13px;
+  padding: 8px 0 0;
+}
+
+@media (max-width: 640px) {
+  .nudge {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 16px;
+    transform: translateY(100%);
+  }
+
+  .nudge.is-visible {
+    transform: translateY(0);
+  }
+
+  .nudge-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+}
 </style>
 </head>
 <body>
@@ -775,6 +888,20 @@ img { max-width: 100%; height: auto; display: block; }
   </div>
 </footer>
 
+<!-- CORNER NUDGE -->
+<aside class="nudge" id="nudge" aria-label="Newsletter signup">
+  <button class="nudge-close" id="nudge-close" aria-label="Dismiss">×</button>
+  <div class="nudge-label">— The Newsletter</div>
+  <div class="nudge-title">The world's shortest legal newsletter.</div>
+  <form class="signup" id="nudge-signup" onsubmit="return handleSignup(event, this)">
+    <div class="signup-row">
+      <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+      <button type="submit">→</button>
+    </div>
+    <p class="success">Thanks. Check your inbox to confirm.</p>
+  </form>
+</aside>
+
 <script>
 // ----- Newsletter signup -----
 async function handleSignup(e, form) {
@@ -861,6 +988,78 @@ function escapeHTML(s) {
 }
 
 document.addEventListener('DOMContentLoaded', loadEpisodes);
+
+// ----- Corner nudge -----
+(function() {
+  const nudge = document.getElementById('nudge');
+  const closeBtn = document.getElementById('nudge-close');
+  const newsletterSection = document.getElementById('newsletter');
+  if (!nudge || !closeBtn || !newsletterSection) return;
+
+  const DISMISS_KEY = 'loc_nudge_dismissed';
+  const SCROLL_THRESHOLD = 0.30; // 30% of page
+
+  // Already dismissed this session — don't show
+  if (sessionStorage.getItem(DISMISS_KEY) === '1') {
+    return;
+  }
+
+  let hasShown = false;
+  let isOverNewsletter = false;
+
+  function updateVisibility() {
+    if (sessionStorage.getItem(DISMISS_KEY) === '1') {
+      nudge.classList.remove('is-visible');
+      return;
+    }
+    if (hasShown && !isOverNewsletter) {
+      nudge.classList.add('is-visible');
+    } else {
+      nudge.classList.remove('is-visible');
+    }
+  }
+
+  function checkScroll() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = docHeight > 0 ? scrollY / docHeight : 0;
+    if (ratio >= SCROLL_THRESHOLD) {
+      hasShown = true;
+      updateVisibility();
+      window.removeEventListener('scroll', checkScroll, { passive: true });
+    }
+  }
+  window.addEventListener('scroll', checkScroll, { passive: true });
+
+  // Hide nudge when newsletter section is on screen
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isOverNewsletter = entry.isIntersecting;
+      updateVisibility();
+    });
+  }, { threshold: 0.25 });
+  observer.observe(newsletterSection);
+
+  // Dismiss button
+  closeBtn.addEventListener('click', () => {
+    sessionStorage.setItem(DISMISS_KEY, '1');
+    nudge.classList.remove('is-visible');
+  });
+
+  // Auto-dismiss on successful subscribe (form gets is-success class)
+  const nudgeForm = document.getElementById('nudge-signup');
+  if (nudgeForm) {
+    const mutObs = new MutationObserver(() => {
+      if (nudgeForm.classList.contains('is-success')) {
+        setTimeout(() => {
+          sessionStorage.setItem(DISMISS_KEY, '1');
+          nudge.classList.remove('is-visible');
+        }, 2500);
+      }
+    });
+    mutObs.observe(nudgeForm, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
 </script>
 
 </body>
