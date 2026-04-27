@@ -74,8 +74,8 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 10px;
   font-family: var(--sans);
   font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.14em;
+  font-size: 15px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -109,7 +109,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 @media (max-width: 640px) {
   .header-inner { padding: 12px 16px; }
-  .brand span { display: none; }
+  .brand { font-size: 13px; letter-spacing: 0.14em; }
   .nav a { padding: 6px 8px; font-size: 12px; letter-spacing: 0.06em; }
 }
 
@@ -475,6 +475,26 @@ img { max-width: 100%; height: auto; display: block; }
   .read-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
+/* Coming-soon variant — single feature card */
+.read-grid.read-grid-coming {
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
+
+.read-card.read-card-feature {
+  border-top: 2px solid var(--ink);
+  padding: 32px 0;
+}
+
+.read-card.read-card-feature h4 {
+  font-size: clamp(24px, 3.2vw, 32px);
+}
+
+.read-card.read-card-feature p {
+  font-size: 16px;
+  max-width: 60ch;
+}
+
 /* ---------- NEWSLETTER (full section) ---------- */
 .newsletter-section {
   padding: 96px 20px;
@@ -553,8 +573,9 @@ img { max-width: 100%; height: auto; display: block; }
   float: left;
   font-size: 4.2em;
   line-height: 0.86;
-  padding-right: 10px;
-  padding-top: 6px;
+  margin-right: 12px;
+  margin-top: 6px;
+  margin-bottom: -6px;
 }
 
 @media (max-width: 800px) {
@@ -735,7 +756,6 @@ img { max-width: 100%; height: auto; display: block; }
 <header class="header">
   <div class="header-inner">
     <a href="#top" class="brand" aria-label="Law of Code home">
-      <img src="logo.jpg" alt="Law of Code">
       <span>Law of Code</span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -754,7 +774,7 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="hero-inner">
     <img class="hero-mark" src="logo.jpg" alt="">
     <h1>Understand the legal layer of emerging tech.</h1>
-    <p class="lede">Get updates on new episodes and stay at the cutting edge of the legal profession and emerging tech with one email per week. Just five bullets: A podcast, article, meme, court case and job opening. That's it.</p>
+    <p class="lede">Stay at the cutting edge of the legal profession and emerging tech. One email each week with five bullets. That's it.</p>
 
     <form class="signup" id="hero-signup" onsubmit="return handleSignup(event, this)">
       <div class="signup-row">
@@ -762,7 +782,7 @@ img { max-width: 100%; height: auto; display: block; }
         <button type="submit">Subscribe</button>
       </div>
       <p class="pitch">The world's shortest legal newsletter.</p>
-      <p class="success">Thanks. Check your inbox to confirm.</p>
+      <p class="success">Welcome! Check your inbox to confirm.</p>
     </form>
     </div>
   </section>
@@ -802,28 +822,13 @@ img { max-width: 100%; height: auto; display: block; }
   <section class="section" id="read">
     <span class="section-label">— Read</span>
     <h2 class="section-title">Long-form explainers.</h2>
-    <p class="section-sub">Plain-English breakdowns of the legal questions emerging tech keeps creating. Written for lawyers, founders and serious generalists.</p>
+    <p class="section-sub">Read-along articles built from the podcast — every episode turned into a structured, skimmable explainer with the audio inline. Plain-English breakdowns of the legal questions emerging tech keeps creating.</p>
 
-    <div class="read-grid">
-      <a class="read-card" href="#">
-        <div class="kicker">Stablecoins · Apr 2026</div>
-        <h4>How freezing a stablecoin actually works — and why issuers should care.</h4>
-        <p>The mechanics of OFAC compliance at the smart-contract level, and what enforcement actions in 2025-26 tell us about the standard of care.</p>
-      </a>
-      <a class="read-card" href="#">
-        <div class="kicker">AI · Mar 2026</div>
-        <h4>Privilege, prompts and the discoverability of LLM logs.</h4>
-        <p>Where the work-product doctrine breaks down when associates run drafts through a model, and how firms are rewriting their retention policies.</p>
-      </a>
-      <a class="read-card" href="#">
-        <div class="kicker">Market structure · Feb 2026</div>
-        <h4>What the GENIUS Act does — and what it leaves untouched.</h4>
-        <p>A section-by-section read of the new federal stablecoin framework, and the open questions Treasury still has to answer through rulemaking.</p>
-      </a>
-      <a class="read-card" href="#">
-        <div class="kicker">Tokenization · Jan 2026</div>
-        <h4>Tokenized treasuries and the Howey trap.</h4>
-        <p>Why on-chain T-bill products keep getting treated as securities, and the structural design choices that change the analysis.</p>
+    <div class="read-grid read-grid-coming">
+      <a class="read-card read-card-feature" href="#newsletter">
+        <div class="kicker">Coming soon</div>
+        <h4>The first read-along articles drop this season.</h4>
+        <p>Subscribe to the newsletter to get them in your inbox the moment they're live — and the five-bullet weekly read in the meantime.</p>
       </a>
     </div>
   </section>
@@ -840,7 +845,7 @@ img { max-width: 100%; height: auto; display: block; }
           <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
           <button type="submit">Subscribe</button>
         </div>
-        <p class="success">Thanks. Check your inbox to confirm.</p>
+        <p class="success">Welcome! Check your inbox to confirm.</p>
       </form>
     </div>
   </section>
@@ -848,12 +853,12 @@ img { max-width: 100%; height: auto; display: block; }
   <!-- ABOUT -->
   <section class="section" id="about">
     <span class="section-label">— About</span>
-    <h2 class="section-title">Five years. 200 episodes. One throughline.</h2>
+    <h2 class="section-title">Nearly six years. Thousands of hours. One goal.</h2>
 
     <div class="about-grid">
       <aside class="about-aside">
         <h3>Jacob Robinson</h3>
-        <p>Host, Law of Code. Trained as a lawyer in Canada, now full-time on the show. Five years and 200 episodes deep on the legal layer of emerging tech.</p>
+        <p>Host, Law of Code. Dual J.D. in U.S. and Canada. Trained as a lawyer, now obsessed with building the world's best legal podcast.</p>
       </aside>
 
       <div class="about-body">
@@ -865,7 +870,7 @@ img { max-width: 100%; height: auto; display: block; }
 
         <p>That stretch gave me a new perspective on what I wanted to spend my time on. Not long after I finished radiation I realized the Law of Code podcast was what I truly loved doing — and that I wanted to build it into a career helping lawyers and operators understand the legal layer of emerging tech. I have been tumor free since the fall of 2025.</p>
 
-        <p>In April 2026 I decided to make Law of Code the best legal podcast in the world. Today it is the world's No. 1 legal tech podcast, with thousands of lawyers regulators and builders listening to deep dives on AI blockchain and crypto the open internet and the legal questions emerging tech keeps creating. The plan from here is to keep going wider — into every major legal vertical — without ever giving up the depth.</p>
+        <p>In April 2026 I decided to make Law of Code the best legal podcast in the world. Today it is the world's No. 1 legal tech podcast (if you disagree, tell me why and I'll improve it), with thousands of lawyers, regulators and builders listening. The plan from here is to keep going wider — into every major legal vertical — without ever giving up the depth.</p>
       </div>
     </div>
   </section>
@@ -891,14 +896,14 @@ img { max-width: 100%; height: auto; display: block; }
 <!-- CORNER NUDGE -->
 <aside class="nudge" id="nudge" aria-label="Newsletter signup">
   <button class="nudge-close" id="nudge-close" aria-label="Dismiss">×</button>
-  <div class="nudge-label">— NEVER MISS AN UPDATE</div>
-  <div class="nudge-title">Subscribe to the world's shortest legal newsletter.</div>
+  <div class="nudge-label">— The Newsletter</div>
+  <div class="nudge-title">The world's shortest legal newsletter.</div>
   <form class="signup" id="nudge-signup" onsubmit="return handleSignup(event, this)">
     <div class="signup-row">
       <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
       <button type="submit">→</button>
     </div>
-    <p class="success">Thanks. Check your inbox to confirm.</p>
+    <p class="success">Welcome! Check your inbox to confirm.</p>
   </form>
 </aside>
 
