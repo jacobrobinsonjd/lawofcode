@@ -83,6 +83,9 @@ img { max-width: 100%; height: auto; display: block; }
 .header .nav a { color: var(--bg); }
 .header .nav a:hover { background: var(--bg); color: var(--ink); }
 
+/* Invisible tap-to-top overlay (mobile only — see media query below) */
+.header-tap { display: none; }
+
 .header-inner {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -133,8 +136,16 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 @media (max-width: 640px) {
-  .header-inner { padding: 12px 16px; }
-  .brand { font-size: 13px; letter-spacing: 0.14em; }
+  .header-inner { padding: 12px 16px; justify-content: center; }
+  .header .brand { display: none; }
+  .header-tap {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .header-inner { position: relative; z-index: 1; pointer-events: none; }
+  .header-inner .nav { pointer-events: auto; }
   .nav a { padding: 6px 8px; font-size: 12px; letter-spacing: 0.06em; }
 }
 
@@ -779,6 +790,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 <!-- HEADER -->
 <header class="header">
+  <a href="#top" class="header-tap" aria-label="Back to top"></a>
   <div class="header-inner">
     <a href="#top" class="brand" aria-label="Law of Code home">
       <span>Law of Code</span>
@@ -786,7 +798,7 @@ img { max-width: 100%; height: auto; display: block; }
     <nav class="nav" aria-label="Primary">
       <a href="#listen">Listen</a>
       <a href="#read">Read</a>
-      <a href="#newsletter">Newsletter</a>
+      <a href="#newsletter">Subscribe</a>
       <a href="#about">About</a>
     </nav>
   </div>
@@ -861,7 +873,7 @@ img { max-width: 100%; height: auto; display: block; }
   <!-- NEWSLETTER (full dark section) -->
   <section class="newsletter-section" id="newsletter">
     <div class="newsletter-inner">
-      <span class="section-label">— Newsletter</span>
+      <span class="section-label">— Subscribe</span>
       <h2>The world's shortest legal newsletter.</h2>
       <p>A short read in your inbox. No filler. No hot takes. The legal developments worth knowing, explained in plain English.</p>
 
@@ -911,7 +923,7 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="footer-links">
       <a href="#listen">Listen</a>
       <a href="#read">Read</a>
-      <a href="#newsletter">Newsletter</a>
+      <a href="#newsletter">Subscribe</a>
       <a href="#about">About</a>
     </div>
     <div class="footer-meta">© 2026 Law of Code · lawofcode.fm</div>
@@ -921,7 +933,7 @@ img { max-width: 100%; height: auto; display: block; }
 <!-- CORNER NUDGE -->
 <aside class="nudge" id="nudge" aria-label="Newsletter signup">
   <button class="nudge-close" id="nudge-close" aria-label="Dismiss">×</button>
-  <div class="nudge-label">— The Newsletter</div>
+  <div class="nudge-label">— Subscribe</div>
   <div class="nudge-title">The world's shortest legal newsletter.</div>
   <form class="signup" id="nudge-signup" onsubmit="return handleSignup(event, this)">
     <div class="signup-row">
