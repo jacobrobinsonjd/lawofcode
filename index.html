@@ -784,6 +784,322 @@ img { max-width: 100%; height: auto; display: block; }
     margin-bottom: 10px;
   }
 }
+/* ---------- EPISODE GRID (Acquired-style tiles) ---------- */
+.grid-section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 80px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.episode-grid a {
+  aspect-ratio: 1 / 1;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  container-type: inline-size;
+}
+
+.episode-grid a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+
+.episode-grid .tile-num {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.55);
+}
+
+.episode-grid .tile-brand {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+.episode-grid .tile-title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(24px, 4.4vw, 52px); /* fallback for old browsers */
+  font-size: 16cqw;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  padding: 0 6%;
+  hyphens: none;
+  word-break: normal;
+  max-width: 100%;
+}
+
+.episode-grid .tile-title.tile-small {
+  font-size: clamp(18px, 2.6vw, 32px); /* fallback */
+  font-size: 11cqw;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* Grid used as the hero / front door of the page — no top border, reduced top padding for header offset */
+.grid-section-hero {
+  border-top: none;
+  padding-top: 56px;
+}
+@media (max-width: 640px) {
+  .grid-section-hero { padding-top: 40px; }
+}
+
+@media (max-width: 900px) {
+  .episode-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .episode-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+.grid-footer {
+  margin-top: 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.grid-interviews-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.grid-interviews-link a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+  transition: opacity 160ms ease;
+}
+
+.grid-interviews-link a:hover { opacity: 0.6; }
+
+.grid-all-btn {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 12px 24px;
+  display: inline-block;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.grid-all-btn:hover { background: var(--ink); color: var(--bg); }
+
+/* ---------- HORIZONTAL EPISODE CAROUSEL ---------- */
+.carousel-section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 80px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 8px 0 20px;
+  margin-top: 40px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel::-webkit-scrollbar { height: 6px; }
+.carousel::-webkit-scrollbar-track { background: transparent; }
+.carousel::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+.carousel-item {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: opacity 200ms ease;
+}
+
+.carousel-item:hover { opacity: 0.7; }
+
+.carousel-tile {
+  aspect-ratio: 1 / 1;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.carousel-tile .tile-num,
+.carousel-tile .tile-brand {
+  position: absolute;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.55);
+}
+.carousel-tile .tile-num { top: 10px; left: 12px; }
+.carousel-tile .tile-brand { bottom: 10px; right: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+.carousel-tile .tile-title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(20px, 3vw, 32px); /* fallback */
+  font-size: 14cqw;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  padding: 0 6%;
+}
+
+.carousel-meta { padding: 0 4px; }
+
+.carousel-meta .caption {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.carousel-meta .date {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .carousel-item { flex-basis: 240px; }
+}
+
+/* ---------- LISTENER QUOTES TICKER ---------- */
+.quotes-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.quotes-inner {
+  max-width: var(--max-w);
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.quotes-inner .section-label { justify-content: center; }
+
+.quotes-inner h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 144;
+}
+
+.ticker {
+  display: flex;
+  gap: 32px;
+  animation: ticker-scroll 60s linear infinite;
+  width: max-content;
+}
+
+.ticker:hover { animation-play-state: paused; }
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.quote-card {
+  flex: 0 0 380px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+.quote-card blockquote {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0 0 20px;
+  letter-spacing: -0.005em;
+}
+
+.quote-card blockquote::before { content: "“"; margin-right: 2px; }
+.quote-card blockquote::after { content: "”"; }
+
+.quote-card .attribution {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.quote-card .attribution strong {
+  color: var(--ink);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+}
+
+@media (max-width: 600px) {
+  .quote-card { flex-basis: 300px; padding: 22px 20px; min-height: 180px; }
+}
+
 </style>
 </head>
 <body>
@@ -806,21 +1122,15 @@ img { max-width: 100%; height: auto; display: block; }
 
 <main id="top">
 
-  <!-- HERO -->
-  <section class="hero hero-dark">
-    <div class="hero-inner">
-    <img class="hero-mark" src="logo-white.png" alt="Law of Code">
-    <h1>Understand the legal layer of emerging tech.</h1>
-    <p class="lede">Weekly updates on the podcast, ongoing court cases and groundbreaking articles. Just five bullets in one email each week.</p>
+  <!-- EPISODE GRID (now the front door) -->
+  <section class="grid-section grid-section-hero" id="episodes">
+    <span class="section-label">— Episodes</span>
 
-    <form class="signup" id="hero-signup" onsubmit="return handleSignup(event, this)">
-      <div class="signup-row">
-        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
-        <button type="submit">Subscribe</button>
-      </div>
-      <p class="pitch">The world's shortest legal newsletter.</p>
-      <p class="success">Welcome! Check your inbox to confirm.</p>
-    </form>
+    <div class="episode-grid" id="episode-grid"></div>
+
+    <div class="grid-footer">
+      <p class="grid-interviews-link">Looking for one-on-one conversations? <a href="/interviews.html">See interviews →</a></p>
+      <a href="https://open.spotify.com/show/4RSekM9c79F86cI2weUq66" target="_blank" rel="noopener" class="grid-all-btn">All episodes →</a>
     </div>
   </section>
 
@@ -844,15 +1154,26 @@ img { max-width: 100%; height: auto; display: block; }
         YouTube
       </a>
     </div>
+  </section>
 
-    <div class="episodes-header">
-      <h3>Recent Episodes</h3>
-      <a href="#">All episodes →</a>
+  <!-- HORIZONTAL EPISODE CAROUSEL -->
+  <section class="carousel-section" id="recent">
+    <span class="section-label">— Most recent</span>
+    <h2 class="section-title">Straight from the feed.</h2>
+    <p class="section-sub">Everything that's dropped lately, in the order it dropped. Interviews included.</p>
+
+    <div class="carousel" id="carousel">
+      <div class="carousel-item" style="color:var(--muted);font-family:var(--sans);font-size:14px;padding:120px 0 0;flex-basis:200px;">Loading…</div>
     </div>
+  </section>
 
-    <ul class="episode-list" id="episode-list">
-      <li style="padding:20px 0;color:var(--muted);font-size:14px;">Loading episodes…</li>
-    </ul>
+  <!-- LISTENER QUOTES TICKER -->
+  <section class="quotes-section" id="quotes">
+    <div class="quotes-inner">
+      <span class="section-label">— From listeners</span>
+      <h2>What people are saying.</h2>
+    </div>
+    <div class="ticker" id="ticker"></div>
   </section>
 
   <!-- READ -->
@@ -867,23 +1188,6 @@ img { max-width: 100%; height: auto; display: block; }
         <h4>The first read-along articles drop this season.</h4>
         <p>Subscribe to the newsletter to get them in your inbox the moment they're live — and the five-bullet weekly read in the meantime.</p>
       </a>
-    </div>
-  </section>
-
-  <!-- NEWSLETTER (full dark section) -->
-  <section class="newsletter-section" id="newsletter">
-    <div class="newsletter-inner">
-      <span class="section-label">— Subscribe</span>
-      <h2>The world's shortest legal newsletter.</h2>
-      <p>A short read in your inbox. No filler. No hot takes. The legal developments worth knowing, explained in plain English.</p>
-
-      <form class="signup" id="footer-signup" onsubmit="return handleSignup(event, this)">
-        <div class="signup-row">
-          <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
-          <button type="submit">Subscribe</button>
-        </div>
-        <p class="success">Welcome! Check your inbox to confirm.</p>
-      </form>
     </div>
   </section>
 
@@ -909,6 +1213,24 @@ img { max-width: 100%; height: auto; display: block; }
 
         <p>In April 2026 I decided to make Law of Code the best legal podcast in the world. Today it is the world's No. 1 legal tech podcast (if you disagree, tell me why and I'll improve it), with thousands of lawyers, regulators and builders listening. The plan from here is to keep going wider — into every major legal vertical — without ever giving up the depth.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- HERO / SUBSCRIBE CLOSE (moved to bottom) -->
+  <section class="hero hero-dark" id="newsletter">
+    <div class="hero-inner">
+    <img class="hero-mark" src="logo-white.png" alt="Law of Code">
+    <h1>Understand the legal layer of emerging tech.</h1>
+    <p class="lede">Weekly updates on the podcast, ongoing court cases and groundbreaking articles. Just five bullets in one email each week.</p>
+
+    <form class="signup" id="hero-signup" onsubmit="return handleSignup(event, this)">
+      <div class="signup-row">
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </div>
+      <p class="pitch">The world's shortest legal newsletter.</p>
+      <p class="success">Welcome! Check your inbox to confirm.</p>
+    </form>
     </div>
   </section>
 
@@ -986,41 +1308,140 @@ async function handleSignup(e, form) {
   return false;
 }
 
-// ----- Episode list (auto-pulled from RSS) -----
-async function loadEpisodes() {
-  const list = document.getElementById('episode-list');
-  if (!list) return;
+// ----- Curated episode grid (Acquired-style tiles) -----
+const CURATED_EPISODES = [
+  { num: 209, title: 'Vaults', spotify: 'https://open.spotify.com/episode/5eRWiZjXTNWnqsBROo4F51' },
+  { num: 208, title: 'Reg Crypto', spotify: 'https://open.spotify.com/episode/3V3JMx8mJDciVRwYyWJS2c' },
+  { num: 207, title: 'Crypto in Canada', spotify: 'https://open.spotify.com/episode/4HI1gduL66LFQ3coD2qEw3' },
+  { num: 206, title: 'Legal AI in 2026', spotify: 'https://open.spotify.com/episode/0G3Wg7OlxPsDvMj1UyoKnI' },
+  { num: 205, title: 'Software & Speech', spotify: 'https://open.spotify.com/episode/5bRc3nxRShCfWRHHGP4kRr' },
+  { num: 202, title: 'Perps', spotify: 'https://open.spotify.com/episode/2SFpNoDovdhRjo3MVmebgY' },
+  { num: 201, title: 'CLARITY Act', spotify: 'https://open.spotify.com/episode/5IVfFa54i3S7Eua8389LXZ' },
+  { num: 200, title: 'MTLs', spotify: 'https://open.spotify.com/episode/4SRRrEoZ6KtqPXSjLiXTCe' },
+  { num: 186, title: 'AI & Privilege', spotify: 'https://open.spotify.com/episode/6llP8Tp7xSulrAButkKhLR' },
+  { num: 185, title: 'Freezing USDC', spotify: 'https://open.spotify.com/episode/5xM0mRG6384C8DADztxVMv' },
+];
+
+function renderEpisodeGrid() {
+  const grid = document.getElementById('episode-grid');
+  if (!grid) return;
+  grid.innerHTML = CURATED_EPISODES.map(ep => {
+    const smallClass = ep.tileSmall ? ' tile-small' : '';
+    return `
+      <a href="${escapeHTML(ep.spotify)}" target="_blank" rel="noopener" aria-label="Episode ${ep.num} — ${escapeHTML(ep.title)}">
+        <span class="tile-num">№ ${ep.num}</span>
+        <span class="tile-title${smallClass}">${escapeHTML(ep.title)}</span>
+      </a>
+    `;
+  }).join('');
+}
+
+// ----- Horizontal carousel (live RSS, most recent) -----
+async function renderCarousel() {
+  const carousel = document.getElementById('carousel');
+  if (!carousel) return;
 
   try {
     const res = await fetch('/api/episodes');
-    if (!res.ok) throw new Error('fetch failed');
-    const data = await res.json();
-    const eps = data.episodes || [];
+    const data = await res.json().catch(() => ({}));
 
-    if (eps.length === 0) {
-      list.innerHTML = '<li style="padding:20px 0;color:var(--muted);font-size:14px;">Episodes coming soon.</li>';
+    if (!res.ok) {
+      console.error('Carousel API error:', res.status, data);
+      carousel.innerHTML = '<div style="color:var(--muted);font-family:var(--sans);font-size:14px;padding:120px 0 0;">Couldn\'t load latest episodes.</div>';
       return;
     }
 
-    list.innerHTML = eps.map(ep => {
-      const num = ep.episode ? `№ ${escapeHTML(ep.episode)}` : '';
-      const title = escapeHTML(ep.title);
-      const date = escapeHTML(ep.pubDate);
+    const eps = (data.episodes || []).slice(0, 10);
+
+    if (eps.length === 0) {
+      carousel.innerHTML = '<div style="color:var(--muted);font-family:var(--sans);font-size:14px;padding:120px 0 0;">More episodes coming soon.</div>';
+      return;
+    }
+
+    carousel.innerHTML = eps.map(ep => {
+      const title = escapeHTML(ep.title || 'Untitled');
+      const date = escapeHTML(ep.pubDate || '');
       const link = escapeHTML(ep.link || '#');
+      const num = ep.episode ? `№ ${escapeHTML(ep.episode)}` : '';
+      // Short tile display: take first 3 words of title or just num
+      const shortTitle = ep.title ? escapeHTML(ep.title.replace(/^#?\d+\s*[-–—:]\s*/, '').replace(/^Interview:\s*/i, '').split(/\s+/).slice(0, 3).join(' ')) : '';
       return `
-        <li>
-          <a href="${link}" target="_blank" rel="noopener" class="episode">
-            <span class="episode-num">${num}</span>
-            <span class="episode-title">${title}</span>
-            <span class="episode-meta">${date}</span>
-          </a>
-        </li>
+        <a class="carousel-item" href="${link}" target="_blank" rel="noopener">
+          <div class="carousel-tile">
+            <span class="tile-num">${num}</span>
+            <span class="tile-title">${shortTitle}</span>
+          </div>
+          <div class="carousel-meta">
+            <div class="caption">${title}</div>
+            <div class="date">${date}</div>
+          </div>
+        </a>
       `;
     }).join('');
   } catch (err) {
-    // Silently leave list empty / fallback to whatever was there
-    console.error('Episode load failed:', err);
+    console.error('Carousel load failed:', err);
+    carousel.innerHTML = '<div style="color:var(--muted);font-family:var(--sans);font-size:14px;padding:120px 0 0;">Couldn\'t load latest episodes.</div>';
   }
+}
+
+// ----- Listener quotes ticker -----
+const LISTENER_QUOTES = [
+  {
+    quote: "Nobody explains the legal layer of frontier tech like Law of Code, and Jacob's balanced, nuanced approach is accessible to everyone.",
+    name: "Stefan Schropp",
+    role: "Regulatory Counsel, Paradigm"
+  },
+  {
+    quote: "Simply the best pure crypto and legal podcast out there.",
+    name: "Lewis Cohen",
+    role: "Partner, Cahill"
+  },
+  {
+    quote: "One of my absolute favorite pods!",
+    name: "Greg Xethalis",
+    role: "GC, Multicoin"
+  },
+  {
+    quote: "This is just great work. It covers history, policy, practical implications, next steps. Great speakers and real commentary rather than hearing the same things over and over again with no real depth.",
+    name: "Thania Charmani",
+    role: "Winston & Taylor"
+  },
+  {
+    quote: "One of the best legal and crypto pods out there. Add Law of Code to your lineup if you aren't already listening.",
+    name: "Joe Doll",
+    role: "GC, Fomo"
+  },
+  {
+    quote: "The recent episodes on Perps and rulemaking at the SEC were SO good!! Always waiting for the next pod to drop.",
+    name: "Samir Singh",
+    role: "Attorney"
+  },
+  {
+    quote: "Jacob does an incredible job putting this show together!",
+    name: "Erich Dylus",
+    role: "Attorney"
+  },
+  {
+    quote: "A wild amount of information organized extremely well.",
+    name: "@Stark_of_Zenon",
+    role: ""
+  },
+];
+
+function renderQuotesTicker() {
+  const ticker = document.getElementById('ticker');
+  if (!ticker) return;
+  // Render twice for seamless loop
+  const cards = LISTENER_QUOTES.map(q => `
+    <div class="quote-card">
+      <blockquote>${escapeHTML(q.quote)}</blockquote>
+      <div class="attribution">
+        <strong>${escapeHTML(q.name)}</strong>
+        ${q.role ? escapeHTML(q.role) : ''}
+      </div>
+    </div>
+  `).join('');
+  ticker.innerHTML = cards + cards;
 }
 
 function escapeHTML(s) {
@@ -1029,7 +1450,11 @@ function escapeHTML(s) {
   }[c]));
 }
 
-document.addEventListener('DOMContentLoaded', loadEpisodes);
+document.addEventListener('DOMContentLoaded', () => {
+  renderEpisodeGrid();
+  renderCarousel();
+  renderQuotesTicker();
+});
 
 // ----- Corner nudge -----
 (function() {
