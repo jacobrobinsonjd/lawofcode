@@ -569,55 +569,6 @@ img { max-width: 100%; height: auto; display: block; }
   .newsletter-section { padding: 64px 20px; }
 }
 
-/* ---------- ABOUT ---------- */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 64px;
-  align-items: start;
-}
-
-.about-aside h3 {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: 24px;
-  letter-spacing: -0.01em;
-  margin-bottom: 12px;
-}
-
-.about-aside p {
-  font-family: var(--sans);
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.about-body {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(17px, 1.8vw, 19px);
-  line-height: 1.65;
-  letter-spacing: -0.005em;
-  font-variation-settings: 'opsz' 14;
-}
-
-.about-body p { margin-bottom: 1.1em; }
-
-.about-body p:first-child::first-letter {
-  font-family: var(--serif);
-  font-weight: 500;
-  float: left;
-  font-size: 4.2em;
-  line-height: 0.86;
-  margin-right: 12px;
-  margin-top: 6px;
-  margin-bottom: -6px;
-}
-
-@media (max-width: 800px) {
-  .about-grid { grid-template-columns: 1fr; gap: 32px; }
-}
-
 /* ---------- FOOTER ---------- */
 .footer {
   border-top: 1px solid var(--line);
@@ -1244,9 +1195,7 @@ img { max-width: 100%; height: auto; display: block; }
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="#episodes">Listen</a>
-      <a href="#read">Read</a>
       <a href="#newsletter">Subscribe</a>
-      <a href="#about">About</a>
     </nav>
   </div>
 </header>
@@ -1280,31 +1229,6 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="ticker" id="ticker"></div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <span class="section-label">— About</span>
-    <h2 class="section-title">Nearly six years. Thousands of hours. One goal.</h2>
-
-    <div class="about-grid">
-      <aside class="about-aside">
-        <h3>Jacob Robinson</h3>
-        <p>Host, Law of Code. Dual J.D. in U.S. and Canada. Trained as a lawyer, now obsessed with building the world's best legal podcast.</p>
-      </aside>
-
-      <div class="about-body">
-        <p>I started the podcast in law school as an excuse to learn from lawyers about an emerging technology I was interested in: Bitcoin. Since then I've spoken with hundreds of lawyers, regulators and builders about emerging technology and the law.</p>
-
-        <p>After graduating I began articling at a major Canadian firm where I worked on what was at the time the largest crypto M&amp;A transaction in Canadian history. While articling I was poached — which doesn't usually happen to someone with technically zero years of practice — to join one of Canada's top firms. In my first months as a first-year associate I helped land a client with a market cap of over a billion dollars and assisted major crypto exchanges in navigating the Canadian legal landscape. I kept the podcast going the whole time.</p>
-
-        <p>Six months into my legal career a tumor started growing around my heart. I didn't know it. I kept getting sicker for nearly two years before anyone found it. Then came chemo and radiation. I was 29.</p>
-
-        <p>That stretch gave me a new perspective on what I wanted to spend my time on. Not long after I finished radiation I realized the Law of Code podcast was what I truly loved doing — and that I wanted to build it into a career helping lawyers and operators understand the legal layer of emerging tech. I have been tumor free since the fall of 2025.</p>
-
-        <p>In April 2026 I decided to make Law of Code the best legal podcast in the world. Today it is the world's No. 1 legal tech podcast (an admittedly small niche), with thousands of lawyers, regulators and builders listening. The plan from here is to keep going wider — into every major legal vertical — without ever giving up the depth.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- HERO / SUBSCRIBE CLOSE (moved to bottom) -->
   <section class="hero hero-dark" id="newsletter">
     <div class="hero-inner">
@@ -1333,9 +1257,7 @@ img { max-width: 100%; height: auto; display: block; }
     </a>
     <div class="footer-links">
       <a href="#episodes">Listen</a>
-      <a href="#read">Read</a>
       <a href="#newsletter">Subscribe</a>
-      <a href="#about">About</a>
     </div>
     <div class="footer-meta">© 2026 Law of Code · lawofcode.fm</div>
   </div>
