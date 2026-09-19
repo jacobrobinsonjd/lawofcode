@@ -796,27 +796,61 @@ img { max-width: 100%; height: auto; display: block; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-top: 40px;
+  margin-top: 0;
 }
 
-.episode-grid a {
+/* Card container — provides 3D perspective */
+.episode-grid .tile {
   aspect-ratio: 1 / 1;
+  perspective: 1000px;
+  position: relative;
+}
+
+/* Flip inner wrapper — rotates on Y axis */
+.episode-grid .tile-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.episode-grid .tile.is-flipped .tile-inner {
+  transform: rotateY(180deg);
+}
+
+/* Both faces share this base */
+.episode-grid .tile-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background: var(--ink);
   color: var(--bg);
-  padding: 20px;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
-  transition: transform 200ms ease, box-shadow 200ms ease;
-  container-type: inline-size;
 }
 
-.episode-grid a:hover {
+.episode-grid .tile-front {
+  cursor: pointer;
+  padding: 20px;
+  text-align: center;
+  container-type: inline-size;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+.episode-grid .tile:not(.is-flipped) .tile-front:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+}
+
+.episode-grid .tile-back {
+  transform: rotateY(180deg);
+  padding: 16px;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
 }
 
 .episode-grid .tile-num {
@@ -828,18 +862,6 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 600;
   letter-spacing: 0.14em;
   color: rgba(255,255,255,0.55);
-}
-
-.episode-grid .tile-brand {
-  position: absolute;
-  bottom: 10px;
-  right: 12px;
-  font-family: var(--sans);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.4);
-  text-transform: uppercase;
 }
 
 .episode-grid .tile-title {
@@ -863,6 +885,64 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: -0.01em;
 }
 
+/* Back-of-tile platform buttons */
+.episode-grid .platform-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 8px;
+  background: transparent;
+  color: var(--bg);
+  border: 1px solid rgba(255,255,255,0.35);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.episode-grid .platform-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--bg);
+}
+
+.episode-grid .platform-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.episode-grid .tile-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  z-index: 2;
+  transition: color 160ms ease, background 160ms ease;
+}
+.episode-grid .tile-close:hover {
+  color: var(--bg);
+  background: rgba(255,255,255,0.1);
+}
+
 /* Grid used as the hero / front door of the page — no top border, reduced top padding for header offset */
 .grid-section-hero {
   border-top: none;
@@ -877,6 +957,8 @@ img { max-width: 100%; height: auto; display: block; }
 }
 @media (max-width: 600px) {
   .episode-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .episode-grid .platform-btn { font-size: 10px; padding: 8px 6px; letter-spacing: 0.08em; }
+  .episode-grid .platform-btn svg { width: 12px; height: 12px; }
 }
 
 .grid-footer {
@@ -918,6 +1000,55 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .grid-all-btn:hover { background: var(--ink); color: var(--bg); }
+
+/* All episodes popover */
+.all-episodes-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.all-episodes-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px;
+  z-index: 20;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+}
+
+.all-episodes-popover[hidden] { display: none; }
+
+.all-episodes-popover .platform-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--bg);
+  border: 1px solid rgba(255,255,255,0.35);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.all-episodes-popover .platform-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--bg);
+}
+.all-episodes-popover .platform-btn svg { width: 14px; height: 14px; }
 
 /* ---------- HORIZONTAL EPISODE CAROUSEL ---------- */
 .carousel-section {
@@ -1112,7 +1243,7 @@ img { max-width: 100%; height: auto; display: block; }
       <span>Law of Code</span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="#listen">Listen</a>
+      <a href="#episodes">Listen</a>
       <a href="#read">Read</a>
       <a href="#newsletter">Subscribe</a>
       <a href="#about">About</a>
@@ -1124,35 +1255,20 @@ img { max-width: 100%; height: auto; display: block; }
 
   <!-- EPISODE GRID (now the front door) -->
   <section class="grid-section grid-section-hero" id="episodes">
-    <span class="section-label">— Episodes</span>
+    <span class="section-label">— Listen</span>
 
     <div class="episode-grid" id="episode-grid"></div>
 
     <div class="grid-footer">
       <p class="grid-interviews-link">Looking for one-on-one conversations? <a href="/interviews.html">See interviews →</a></p>
-      <a href="https://open.spotify.com/show/4RSekM9c79F86cI2weUq66" target="_blank" rel="noopener" class="grid-all-btn">All episodes →</a>
-    </div>
-  </section>
-
-  <!-- LISTEN -->
-  <section class="section" id="listen">
-    <span class="section-label">— Listen</span>
-    <h2 class="section-title">The podcast.</h2>
-    <p class="section-sub">Deep-dive explainers and interviews with the people shaping the legal and regulatory landscape of emerging technology. One lawyer told me a firm could charge $60,000 for one of the podcast episodes if it were a legal memo. Another sent it to every employee at their startup.</p>
-
-    <div class="listen-grid">
-      <a href="https://podcasts.apple.com/ca/podcast/law-of-code/id1578287932" target="_blank" rel="noopener" aria-label="Listen on Apple Podcasts">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 8c-1.1 0-2 .9-2 2v3.5a2 2 0 1 0 4 0V16c0-1.1-.9-2-2-2z"/></svg>
-        Apple Podcasts
-      </a>
-      <a href="https://open.spotify.com/show/4RSekM9c79F86cI2weUq66" target="_blank" rel="noopener" aria-label="Listen on Spotify">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.43a.62.62 0 0 1-.86.21c-2.36-1.44-5.33-1.77-8.83-.97a.625.625 0 1 1-.28-1.22c3.83-.87 7.12-.5 9.77 1.12.3.18.39.57.2.86zm1.22-2.71a.78.78 0 0 1-1.08.26c-2.7-1.66-6.82-2.14-10.02-1.17a.78.78 0 1 1-.45-1.49c3.65-1.11 8.19-.57 11.29 1.32.36.22.48.7.26 1.08zm.11-2.83c-3.24-1.92-8.59-2.1-11.69-1.16a.94.94 0 1 1-.54-1.79c3.55-1.08 9.45-.87 13.18 1.34.45.27.6.85.34 1.3-.27.45-.85.6-1.29.31z"/></svg>
-        Spotify
-      </a>
-      <a href="https://www.youtube.com/@lawofcodeFM" target="_blank" rel="noopener" aria-label="Watch on YouTube">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.51 2.51 0 0 0-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.51 2.51 0 0 0 2.42 7.19 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.51 2.51 0 0 0 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
-        YouTube
-      </a>
+      <div class="all-episodes-wrap">
+        <button type="button" class="grid-all-btn" id="all-episodes-toggle" aria-expanded="false" aria-controls="all-episodes-popover">All episodes →</button>
+        <div class="all-episodes-popover" id="all-episodes-popover" hidden>
+          <a class="platform-btn" href="https://podcasts.apple.com/ca/podcast/law-of-code/id1578287932" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 8c-1.1 0-2 .9-2 2v3.5a2 2 0 1 0 4 0V16c0-1.1-.9-2-2-2z"/></svg><span>Apple</span></a>
+          <a class="platform-btn" href="https://open.spotify.com/show/4RSekM9c79F86cI2weUq66" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.43a.62.62 0 0 1-.86.21c-2.36-1.44-5.33-1.77-8.83-.97a.625.625 0 1 1-.28-1.22c3.83-.87 7.12-.5 9.77 1.12.3.18.39.57.2.86zm1.22-2.71a.78.78 0 0 1-1.08.26c-2.7-1.66-6.82-2.14-10.02-1.17a.78.78 0 1 1-.45-1.49c3.65-1.11 8.19-.57 11.29 1.32.36.22.48.7.26 1.08zm.11-2.83c-3.24-1.92-8.59-2.1-11.69-1.16a.94.94 0 1 1-.54-1.79c3.55-1.08 9.45-.87 13.18 1.34.45.27.6.85.34 1.3-.27.45-.85.6-1.29.31z"/></svg><span>Spotify</span></a>
+          <a class="platform-btn" href="https://www.youtube.com/@lawofcodeFM" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.51 2.51 0 0 0-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.51 2.51 0 0 0 2.42 7.19 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.51 2.51 0 0 0 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg><span>YouTube</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1243,7 +1359,7 @@ img { max-width: 100%; height: auto; display: block; }
       <span>Law of Code</span>
     </a>
     <div class="footer-links">
-      <a href="#listen">Listen</a>
+      <a href="#episodes">Listen</a>
       <a href="#read">Read</a>
       <a href="#newsletter">Subscribe</a>
       <a href="#about">About</a>
@@ -1309,6 +1425,10 @@ async function handleSignup(e, form) {
 }
 
 // ----- Curated episode grid (Acquired-style tiles) -----
+const YOUTUBE_CHANNEL = 'https://www.youtube.com/@lawofcodeFM';
+const APPLE_SHOW_URL = 'https://podcasts.apple.com/ca/podcast/law-of-code/id1578287932';
+const SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/4RSekM9c79F86cI2weUq66';
+
 const CURATED_EPISODES = [
   { num: 209, title: 'Vaults', spotify: 'https://open.spotify.com/episode/5eRWiZjXTNWnqsBROo4F51' },
   { num: 208, title: 'Reg Crypto', spotify: 'https://open.spotify.com/episode/3V3JMx8mJDciVRwYyWJS2c' },
@@ -1322,19 +1442,143 @@ const CURATED_EPISODES = [
   { num: 185, title: 'Freezing USDC', spotify: 'https://open.spotify.com/episode/5xM0mRG6384C8DADztxVMv' },
 ];
 
-function renderEpisodeGrid() {
+// Normalize a title for matching against Apple's iTunes lookup response
+function normalizeTitle(s) {
+  return String(s)
+    .toLowerCase()
+    .replace(/^#?\d+\s*[-–—:]\s*/, '')
+    .replace(/^interview:\s*/i, '')
+    .replace(/[^\w\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Fetch Apple episode URLs (title -> URL map)
+async function fetchAppleUrls() {
+  try {
+    const res = await fetch('/api/apple-episodes');
+    if (!res.ok) return {};
+    const data = await res.json();
+    return data.episodes || {};
+  } catch (err) {
+    console.warn('Apple URL fetch failed, falling back to show URL:', err);
+    return {};
+  }
+}
+
+// Also fetch RSS to get Apple URL matches even for titles that might vary slightly
+async function fetchRssTitles() {
+  try {
+    const res = await fetch('/api/episodes');
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.episodes || [];
+  } catch (err) {
+    return [];
+  }
+}
+
+function tileIconSvg(platform) {
+  if (platform === 'apple') {
+    return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 8c-1.1 0-2 .9-2 2v3.5a2 2 0 1 0 4 0V16c0-1.1-.9-2-2-2z"/></svg>';
+  }
+  if (platform === 'spotify') {
+    return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.43a.62.62 0 0 1-.86.21c-2.36-1.44-5.33-1.77-8.83-.97a.625.625 0 1 1-.28-1.22c3.83-.87 7.12-.5 9.77 1.12.3.18.39.57.2.86zm1.22-2.71a.78.78 0 0 1-1.08.26c-2.7-1.66-6.82-2.14-10.02-1.17a.78.78 0 1 1-.45-1.49c3.65-1.11 8.19-.57 11.29 1.32.36.22.48.7.26 1.08zm.11-2.83c-3.24-1.92-8.59-2.1-11.69-1.16a.94.94 0 1 1-.54-1.79c3.55-1.08 9.45-.87 13.18 1.34.45.27.6.85.34 1.3-.27.45-.85.6-1.29.31z"/></svg>';
+  }
+  // youtube
+  return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.51 2.51 0 0 0-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.51 2.51 0 0 0 2.42 7.19 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.51 2.51 0 0 0 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>';
+}
+
+async function renderEpisodeGrid() {
   const grid = document.getElementById('episode-grid');
   if (!grid) return;
-  grid.innerHTML = CURATED_EPISODES.map(ep => {
+
+  // Render synchronously first with Spotify URL for each, Apple/YouTube fallback to show pages
+  const buildTileHtml = (ep, appleUrl) => {
     const smallClass = ep.tileSmall ? ' tile-small' : '';
+    const tileId = `tile-${ep.num}`;
     return `
-      <a href="${escapeHTML(ep.spotify)}" target="_blank" rel="noopener" aria-label="Episode ${ep.num} — ${escapeHTML(ep.title)}">
-        <span class="tile-num">№ ${ep.num}</span>
-        <span class="tile-title${smallClass}">${escapeHTML(ep.title)}</span>
-      </a>
+      <div class="tile" data-tile-id="${tileId}">
+        <div class="tile-inner">
+          <button type="button" class="tile-face tile-front" data-flip-trigger="${tileId}" aria-label="Show listen options for episode ${ep.num} — ${escapeHTML(ep.title)}">
+            <span class="tile-num">№ ${ep.num}</span>
+            <span class="tile-title${smallClass}">${escapeHTML(ep.title)}</span>
+          </button>
+          <div class="tile-face tile-back" aria-hidden="true">
+            <button type="button" class="tile-close" data-flip-back="${tileId}" aria-label="Close">×</button>
+            <a class="platform-btn" href="${escapeHTML(appleUrl || APPLE_SHOW_URL)}" target="_blank" rel="noopener">${tileIconSvg('apple')}<span>Apple</span></a>
+            <a class="platform-btn" href="${escapeHTML(ep.spotify)}" target="_blank" rel="noopener">${tileIconSvg('spotify')}<span>Spotify</span></a>
+            <a class="platform-btn" href="${escapeHTML(YOUTUBE_CHANNEL)}" target="_blank" rel="noopener">${tileIconSvg('youtube')}<span>YouTube</span></a>
+          </div>
+        </div>
+      </div>
     `;
+  };
+
+  // Initial render — Apple fallbacks to show page
+  grid.innerHTML = CURATED_EPISODES.map(ep => buildTileHtml(ep)).join('');
+  attachTileHandlers(grid);
+
+  // Async: fetch Apple episode URLs, then upgrade the cards in place
+  const [appleMap, rssItems] = await Promise.all([fetchAppleUrls(), fetchRssTitles()]);
+
+  if (Object.keys(appleMap).length === 0) return;
+
+  // Also try to match via RSS titles if Apple's title differs slightly (RSS may have the "#NNN -" prefix)
+  const rssByEpisode = {};
+  rssItems.forEach(item => {
+    if (item.episode) rssByEpisode[item.episode] = item;
+  });
+
+  // Rebuild with matched Apple URLs
+  grid.innerHTML = CURATED_EPISODES.map(ep => {
+    // Try direct match on curated title
+    let appleUrl = appleMap[normalizeTitle(ep.title)];
+
+    // If no match, try matching via the RSS item's title (Apple might store the full "#NNN - Title" form)
+    if (!appleUrl && rssByEpisode[ep.num]) {
+      appleUrl = appleMap[normalizeTitle(rssByEpisode[ep.num].title)];
+    }
+
+    return buildTileHtml(ep, appleUrl);
   }).join('');
+  attachTileHandlers(grid);
 }
+
+function attachTileHandlers(grid) {
+  // Delegated click handler for flipping
+  grid.querySelectorAll('[data-flip-trigger]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = btn.getAttribute('data-flip-trigger');
+      const tile = grid.querySelector(`[data-tile-id="${id}"]`);
+      if (tile) {
+        // Close any other open tile first
+        grid.querySelectorAll('.tile.is-flipped').forEach(t => {
+          if (t !== tile) t.classList.remove('is-flipped');
+        });
+        tile.classList.add('is-flipped');
+      }
+    });
+  });
+
+  // Close buttons on the back
+  grid.querySelectorAll('[data-flip-back]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = btn.getAttribute('data-flip-back');
+      const tile = grid.querySelector(`[data-tile-id="${id}"]`);
+      if (tile) tile.classList.remove('is-flipped');
+    });
+  });
+}
+
+// Click outside any tile closes any open tiles
+document.addEventListener('click', (e) => {
+  const grid = document.getElementById('episode-grid');
+  if (!grid) return;
+  if (grid.contains(e.target)) return; // click inside grid handled by tile buttons
+  grid.querySelectorAll('.tile.is-flipped').forEach(t => t.classList.remove('is-flipped'));
+});
 
 // ----- Horizontal carousel (live RSS, most recent) -----
 async function renderCarousel() {
@@ -1454,7 +1698,36 @@ document.addEventListener('DOMContentLoaded', () => {
   renderEpisodeGrid();
   renderCarousel();
   renderQuotesTicker();
+  wireAllEpisodesPopover();
 });
+
+function wireAllEpisodesPopover() {
+  const toggle = document.getElementById('all-episodes-toggle');
+  const popover = document.getElementById('all-episodes-popover');
+  if (!toggle || !popover) return;
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = !popover.hidden;
+    popover.hidden = isOpen;
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!popover.hidden && !popover.contains(e.target) && e.target !== toggle) {
+      popover.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !popover.hidden) {
+      popover.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
+}
 
 // ----- Corner nudge -----
 (function() {
