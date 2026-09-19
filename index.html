@@ -1325,15 +1325,15 @@ const APPLE_SHOW_URL = 'https://podcasts.apple.com/ca/podcast/law-of-code/id1578
 const SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/4RSekM9c79F86cI2weUq66';
 
 const CURATED_EPISODES = [
-  { num: 209, title: 'Vaults', spotify: 'https://open.spotify.com/episode/5eRWiZjXTNWnqsBROo4F51' },
-  { num: 208, title: 'Reg Crypto', spotify: 'https://open.spotify.com/episode/3V3JMx8mJDciVRwYyWJS2c' },
-  { num: 207, title: 'Crypto in Canada', spotify: 'https://open.spotify.com/episode/4HI1gduL66LFQ3coD2qEw3' },
-  { num: 206, title: 'Legal AI in 2026', spotify: 'https://open.spotify.com/episode/0G3Wg7OlxPsDvMj1UyoKnI' },
-  { num: 205, title: 'Software & Speech', spotify: 'https://open.spotify.com/episode/5bRc3nxRShCfWRHHGP4kRr' },
-  { num: 202, title: 'Perps', spotify: 'https://open.spotify.com/episode/2SFpNoDovdhRjo3MVmebgY' },
-  { num: 201, title: 'CLARITY Act', spotify: 'https://open.spotify.com/episode/5IVfFa54i3S7Eua8389LXZ' },
-  { num: 200, title: 'MTLs', spotify: 'https://open.spotify.com/episode/4SRRrEoZ6KtqPXSjLiXTCe' },
-  { num: 186, title: 'AI & Privilege', spotify: 'https://open.spotify.com/episode/6llP8Tp7xSulrAButkKhLR' },
+  { num: 209, title: 'Vaults', spotify: 'https://open.spotify.com/episode/5eRWiZjXTNWnqsBROo4F51', youtubeUrl: 'https://www.youtube.com/watch?v=e9RdgDZDnJE' },
+  { num: 208, title: 'Reg Crypto', spotify: 'https://open.spotify.com/episode/3V3JMx8mJDciVRwYyWJS2c', youtubeUrl: 'https://www.youtube.com/watch?v=0LopwAGCFgI' },
+  { num: 207, title: 'Crypto in Canada', spotify: 'https://open.spotify.com/episode/4HI1gduL66LFQ3coD2qEw3', youtubeUrl: 'https://www.youtube.com/watch?v=vIeP6eieILY' },
+  { num: 206, title: 'Legal AI in 2026', spotify: 'https://open.spotify.com/episode/0G3Wg7OlxPsDvMj1UyoKnI', youtubeUrl: 'https://www.youtube.com/watch?v=vjx8uq7UKa0' },
+  { num: 205, title: 'Software & Speech', spotify: 'https://open.spotify.com/episode/5bRc3nxRShCfWRHHGP4kRr', youtubeUrl: 'https://www.youtube.com/watch?v=cUEc2pN_kaU' },
+  { num: 202, title: 'Perps', spotify: 'https://open.spotify.com/episode/2SFpNoDovdhRjo3MVmebgY', youtubeUrl: 'https://www.youtube.com/watch?v=9jN5bUk4ewI' },
+  { num: 201, title: 'CLARITY Act', spotify: 'https://open.spotify.com/episode/5IVfFa54i3S7Eua8389LXZ', youtubeUrl: 'https://www.youtube.com/watch?v=hWoviVM_nD0' },
+  { num: 200, title: 'MTLs', spotify: 'https://open.spotify.com/episode/4SRRrEoZ6KtqPXSjLiXTCe', youtubeUrl: 'https://www.youtube.com/watch?v=0ytWCmqvVBY' },
+  { num: 186, title: 'AI & Privilege', spotify: 'https://open.spotify.com/episode/6llP8Tp7xSulrAButkKhLR', youtubeUrl: 'https://www.youtube.com/watch?v=Kxd8CpmtFkg' },
   { num: 185, title: 'Freezing USDC', spotify: 'https://open.spotify.com/episode/5xM0mRG6384C8DADztxVMv' },
 ];
 
@@ -1342,6 +1342,7 @@ function normalizeTitle(s) {
   return String(s)
     .toLowerCase()
     .replace(/^#?\d+\s*[-–—:]\s*/, '')
+    .replace(/^ep(?:isode)?\.?\s*\d+\s*[-–—:]\s*/i, '')
     .replace(/^interview:\s*/i, '')
     .replace(/[^\w\s]/g, ' ')
     .replace(/\s+/g, ' ')
@@ -1361,7 +1362,19 @@ async function fetchAppleUrls() {
   }
 }
 
-// Also fetch RSS to get Apple URL matches even for titles that might vary slightly
+async function fetchYouTubeUrls() {
+  try {
+    const res = await fetch('/api/youtube-episodes');
+    if (!res.ok) return {};
+    const data = await res.json();
+    return data.episodes || {};
+  } catch (err) {
+    console.warn('YouTube URL fetch failed, falling back to channel URL:', err);
+    return {};
+  }
+}
+
+// Also fetch RSS to get URL matches even for titles that might vary slightly
 async function fetchRssTitles() {
   try {
     const res = await fetch('/api/episodes');
@@ -1384,12 +1397,37 @@ function tileIconSvg(platform) {
   return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.58 7.19a2.51 2.51 0 0 0-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42A2.51 2.51 0 0 0 2.42 7.19 26.2 26.2 0 0 0 2 12a26.2 26.2 0 0 0 .42 4.81 2.51 2.51 0 0 0 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.77A26.2 26.2 0 0 0 22 12a26.2 26.2 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>';
 }
 
+// Try several strategies to match an episode against a platform's URL map.
+// Order: manual override > direct title match > RSS title match > episode number in title match
+function matchPlatformUrl(ep, platformMap, rssByEpisode, manualKey) {
+  // 1. Manual override on episode data (e.g. ep.appleUrl or ep.youtubeUrl)
+  if (manualKey && ep[manualKey]) return ep[manualKey];
+
+  // 2. Direct match on curated title
+  let url = platformMap[normalizeTitle(ep.title)];
+  if (url) return url;
+
+  // 3. Match via the RSS item's title (may include "#NNN -" prefix that's already normalized away)
+  if (rssByEpisode[ep.num]) {
+    url = platformMap[normalizeTitle(rssByEpisode[ep.num].title)];
+    if (url) return url;
+  }
+
+  // 4. Fuzzy match: find any platform title containing the episode number
+  const numStr = String(ep.num);
+  const matchingKey = Object.keys(platformMap).find(k => {
+    return k.includes(` ${numStr} `) || k.startsWith(`${numStr} `) || k.endsWith(` ${numStr}`) || k === numStr;
+  });
+  if (matchingKey) return platformMap[matchingKey];
+
+  return null;
+}
+
 async function renderEpisodeGrid() {
   const grid = document.getElementById('episode-grid');
   if (!grid) return;
 
-  // Render synchronously first with Spotify URL for each, Apple/YouTube fallback to show pages
-  const buildTileHtml = (ep, appleUrl) => {
+  const buildTileHtml = (ep, appleUrl, youtubeUrl) => {
     const smallClass = ep.tileSmall ? ' tile-small' : '';
     const tileId = `tile-${ep.num}`;
     return `
@@ -1403,41 +1441,46 @@ async function renderEpisodeGrid() {
             <button type="button" class="tile-close" data-flip-back="${tileId}" aria-label="Close">×</button>
             <a class="platform-btn" href="${escapeHTML(appleUrl || APPLE_SHOW_URL)}" target="_blank" rel="noopener">${tileIconSvg('apple')}<span>Apple</span></a>
             <a class="platform-btn" href="${escapeHTML(ep.spotify)}" target="_blank" rel="noopener">${tileIconSvg('spotify')}<span>Spotify</span></a>
-            <a class="platform-btn" href="${escapeHTML(YOUTUBE_CHANNEL)}" target="_blank" rel="noopener">${tileIconSvg('youtube')}<span>YouTube</span></a>
+            <a class="platform-btn" href="${escapeHTML(youtubeUrl || YOUTUBE_CHANNEL)}" target="_blank" rel="noopener">${tileIconSvg('youtube')}<span>YouTube</span></a>
           </div>
         </div>
       </div>
     `;
   };
 
-  // Initial render — Apple fallbacks to show page
-  grid.innerHTML = CURATED_EPISODES.map(ep => buildTileHtml(ep)).join('');
+  // Initial render — Apple and YouTube fall back to show pages
+  grid.innerHTML = CURATED_EPISODES.map(ep => buildTileHtml(ep, ep.appleUrl, ep.youtubeUrl)).join('');
   attachTileHandlers(grid);
 
-  // Async: fetch Apple episode URLs, then upgrade the cards in place
-  const [appleMap, rssItems] = await Promise.all([fetchAppleUrls(), fetchRssTitles()]);
+  // Async: fetch Apple and YouTube episode URLs in parallel
+  const [appleMap, youtubeMap, rssItems] = await Promise.all([
+    fetchAppleUrls(),
+    fetchYouTubeUrls(),
+    fetchRssTitles(),
+  ]);
 
-  if (Object.keys(appleMap).length === 0) return;
-
-  // Also try to match via RSS titles if Apple's title differs slightly (RSS may have the "#NNN -" prefix)
   const rssByEpisode = {};
   rssItems.forEach(item => {
     if (item.episode) rssByEpisode[item.episode] = item;
   });
 
-  // Rebuild with matched Apple URLs
+  // Rebuild with matched URLs (only if we got some matches)
+  const hasAny = Object.keys(appleMap).length + Object.keys(youtubeMap).length > 0;
+  if (!hasAny) return;
+
+  // Console log the match rate for diagnostics
+  let appleMatches = 0, youtubeMatches = 0;
+
   grid.innerHTML = CURATED_EPISODES.map(ep => {
-    // Try direct match on curated title
-    let appleUrl = appleMap[normalizeTitle(ep.title)];
-
-    // If no match, try matching via the RSS item's title (Apple might store the full "#NNN - Title" form)
-    if (!appleUrl && rssByEpisode[ep.num]) {
-      appleUrl = appleMap[normalizeTitle(rssByEpisode[ep.num].title)];
-    }
-
-    return buildTileHtml(ep, appleUrl);
+    const appleUrl = matchPlatformUrl(ep, appleMap, rssByEpisode, 'appleUrl');
+    const youtubeUrl = matchPlatformUrl(ep, youtubeMap, rssByEpisode, 'youtubeUrl');
+    if (appleUrl && appleUrl !== APPLE_SHOW_URL) appleMatches++;
+    if (youtubeUrl && youtubeUrl !== YOUTUBE_CHANNEL) youtubeMatches++;
+    return buildTileHtml(ep, appleUrl, youtubeUrl);
   }).join('');
   attachTileHandlers(grid);
+
+  console.log(`Episode URL matching: Apple ${appleMatches}/${CURATED_EPISODES.length}, YouTube ${youtubeMatches}/${CURATED_EPISODES.length}`);
 }
 
 function attachTileHandlers(grid) {
