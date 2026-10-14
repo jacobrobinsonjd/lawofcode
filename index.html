@@ -816,14 +816,15 @@ img { max-width: 100%; height: auto; display: block; }
 .episode-grid .tile-title {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 800;
-  font-size: clamp(24px, 4.4vw, 52px); /* fallback for old browsers */
-  font-size: 16cqw;
-  line-height: 1;
+  font-size: clamp(22px, 4.4vw, 48px); /* fallback for old browsers */
+  font-size: 14cqw;
+  line-height: 1.02;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   padding: 0 6%;
   hyphens: none;
-  word-break: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
   max-width: 100%;
 }
 
@@ -1232,14 +1233,14 @@ img { max-width: 100%; height: auto; display: block; }
     <div class="hero-inner">
     <img class="hero-mark" src="logo-white.png" alt="Law of Code">
     <h1>Understand the legal layer of emerging tech.</h1>
-    <p class="lede">Weekly updates on the podcast, ongoing court cases and groundbreaking articles. Just five bullets in one email each week.</p>
+    <p class="lede">Weekly updates on the podcast, ongoing court cases and groundbreaking articles. Launching 2027.</p>
 
     <form class="signup" id="hero-signup" onsubmit="return handleSignup(event, this)">
       <div class="signup-row">
         <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
         <button type="submit">Subscribe</button>
       </div>
-      <p class="pitch">The world's shortest legal newsletter, launching 2027.</p>
+      <p class="pitch">The world's shortest legal newsletter.</p>
       <p class="success">Welcome! Check your inbox to confirm.</p>
     </form>
     </div>
@@ -1322,7 +1323,7 @@ const APPLE_SHOW_URL = 'https://podcasts.apple.com/ca/podcast/law-of-code/id1578
 const SPOTIFY_SHOW_URL = 'https://open.spotify.com/show/4RSekM9c79F86cI2weUq66';
 
 const CURATED_EPISODES = [
-  { num: 211, title: 'AI Distillation', spotify: 'https://open.spotify.com/episode/12cfVRsNK0f2yNNmf4cXc5', youtubeUrl: 'https://www.youtube.com/watch?v=iP0mRm9ZkXs', appleUrl: 'https://podcasts.apple.com/ca/podcast/211-is-ai-distillation-illegal/id1578287932?i=1000793123586' },
+  { num: 211, title: 'Distilling AI', spotify: 'https://open.spotify.com/episode/12cfVRsNK0f2yNNmf4cXc5', youtubeUrl: 'https://www.youtube.com/watch?v=iP0mRm9ZkXs', appleUrl: 'https://podcasts.apple.com/ca/podcast/211-is-ai-distillation-illegal/id1578287932?i=1000793123586' },
   { num: 210, title: 'Letters of Marque', spotify: 'https://open.spotify.com/episode/3Xqz6Kvw6MUdcsDE0B9TQS', youtubeUrl: 'https://www.youtube.com/watch?v=IeNvYEmZ3po', appleUrl: 'https://podcasts.apple.com/ca/podcast/210-cyber-letters-of-marque/id1578287932?i=1000791022096' },
   { num: 209, title: 'Vaults', spotify: 'https://open.spotify.com/episode/5eRWiZjXTNWnqsBROo4F51', youtubeUrl: 'https://www.youtube.com/watch?v=e9RdgDZDnJE' },
   { num: 208, title: 'Reg Crypto', spotify: 'https://open.spotify.com/episode/3V3JMx8mJDciVRwYyWJS2c', youtubeUrl: 'https://www.youtube.com/watch?v=0LopwAGCFgI' },
@@ -1331,7 +1332,7 @@ const CURATED_EPISODES = [
   { num: 205, title: 'Software & Speech', spotify: 'https://open.spotify.com/episode/5bRc3nxRShCfWRHHGP4kRr', youtubeUrl: 'https://www.youtube.com/watch?v=cUEc2pN_kaU' },
   { num: 202, title: 'Perps', spotify: 'https://open.spotify.com/episode/2SFpNoDovdhRjo3MVmebgY', youtubeUrl: 'https://www.youtube.com/watch?v=9jN5bUk4ewI' },
   { num: 201, title: 'CLARITY Act', spotify: 'https://open.spotify.com/episode/5IVfFa54i3S7Eua8389LXZ', youtubeUrl: 'https://www.youtube.com/watch?v=hWoviVM_nD0' },
-  { num: 200, title: 'MTLs', spotify: 'https://open.spotify.com/episode/4SRRrEoZ6KtqPXSjLiXTCe', youtubeUrl: 'https://www.youtube.com/watch?v=0ytWCmqvVBY' },
+  { num: 200, title: 'Developer Liability', spotify: 'https://open.spotify.com/episode/4SRRrEoZ6KtqPXSjLiXTCe', youtubeUrl: 'https://www.youtube.com/watch?v=0ytWCmqvVBY' },
   { num: 186, title: 'AI & Privilege', spotify: 'https://open.spotify.com/episode/6llP8Tp7xSulrAButkKhLR', youtubeUrl: 'https://www.youtube.com/watch?v=Kxd8CpmtFkg' },
   { num: 185, title: 'Freezing USDC', spotify: 'https://open.spotify.com/episode/5xM0mRG6384C8DADztxVMv' },
 ];
