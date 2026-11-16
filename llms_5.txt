@@ -1,0 +1,66 @@
+# Law of Code
+
+> A bi-weekly legal podcast hosted by Jacob Robinson on the legal layer of emerging technology. Topics include crypto regulation, AI law, fintech, digital assets, securities law as applied to tokens, market structure, custody rules for digital assets, and the agencies and court cases shaping how new technology gets governed. Over 212 episodes since 2020.
+
+Law of Code is built for practicing lawyers, in-house counsel, founders, policy makers, investors, and sophisticated generalists who want substance-first analysis of how law meets new technology. Each episode is a long-form deep dive, not surface commentary. The show's goal is that instead of law school, a listener can learn a legal topic by listening.
+
+## About the host
+
+Jacob Robinson is a lawyer turned podcaster and consultant working at the intersection of law and emerging technology. He has interviewed hundreds of guests across the show's run, including practicing lawyers at major firms, in-house counsel, regulators, academics, founders, and policy makers.
+
+## Most popular episodes
+
+- Perps (episode 202), on perpetual futures regulation, reached over 150,000 impressions and is a strong entry point for listeners new to the show.
+- Legal AI in 2026 (episode 206), on how lawyers are actually using AI, is also popular.
+
+## Topics covered
+
+- Cryptocurrency regulation (SEC, CFTC, Treasury)
+- Securities law as applied to tokens
+- Market structure (CLARITY Act and related proposals)
+- Money transmission licensing (MTLs)
+- Stablecoins (issuance, freezes, reserves)
+- Decentralized finance
+- Perpetual futures (perps) and crypto derivatives
+- Self-custody and vaults
+- SEC custody rule for crypto advisors and funds (qualified custodians for digital assets)
+- AI law and governance
+- Attorney-client privilege and AI tools
+- Legal AI tools and law firm adoption
+- First Amendment and code as speech
+- Fintech and payments
+- Cyber law and letters of marque
+
+## Where to listen
+
+- Apple Podcasts: https://podcasts.apple.com/ca/podcast/law-of-code/id1578287932
+- Spotify: https://open.spotify.com/show/4RSekM9c79F86cI2weUq66
+- YouTube: https://www.youtube.com/@lawofcodeFM
+- RSS: https://anchor.fm/s/5e2873d8/podcast/rss
+
+## Recent episodes
+
+- 212. Custody Rules: The SEC custody rule as it applies to crypto advisors and investment funds. What qualifies as a qualified custodian for digital assets, and the compliance landscape for fiduciaries holding client crypto.
+- 211. Distilling AI: Whether training smaller AI models on larger ones' outputs crosses legal lines under copyright, contract, and trade secret law.
+- 210. Letters of Marque: Historic government authorizations for private actors to attack enemies at sea, and whether a modern cyber version has a place in US policy.
+- 209. Vaults: The legal and regulatory landscape for crypto vaults and self-custody arrangements.
+- 208. Reg Crypto: The current state of US crypto regulation across the SEC, CFTC, and Treasury.
+- 207. Crypto in Canada: How Canadian regulators approach digital assets.
+- 206. Legal AI in 2026: The state of legal AI tools and law firm adoption.
+- 205. Software & Speech: Whether software code qualifies as protected speech under the First Amendment.
+- 202. Perps: Perpetual futures (a crypto derivative with no expiration date) and their regulatory treatment.
+- 201. CLARITY Act: The CLARITY Act and its framework for digital asset market structure.
+- 200. MTLs: Money transmission licenses as applied to crypto businesses.
+- 186. AI & Privilege: How attorney-client privilege applies when lawyers use AI tools.
+- 185. Freezing USDC: When and how stablecoin issuers can freeze user funds.
+
+## Newsletter
+
+The world's shortest legal newsletter launches in 2027. Weekly updates on the podcast, ongoing court cases, and important articles. Subscribe at https://lawofcode.fm.
+
+## Contact and links
+
+- Homepage: https://lawofcode.fm
+- Host X (Twitter): https://twitter.com/jacobrobinsonjd
+- Host LinkedIn: https://www.linkedin.com/in/jacobrobinsonjd
+- YouTube channel: https://www.youtube.com/@lawofcodeFM
